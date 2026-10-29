@@ -39,6 +39,12 @@
                width="480" height="1040" decoding="async" loading="lazy"
                alt="Postseason bracket widgets showing NLCS, NLDS and NL Wild Card series results"></a>
       </div>
+      <div class="screens__nav">
+        <button type="button" class="screens__arrow" data-dir="-1" aria-label="Scroll screenshots left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg></button>
+        <button type="button" class="screens__arrow" data-dir="1" aria-label="Scroll screenshots right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></button>
+      </div>
     </div>
 
     <hr class="rule">
@@ -106,6 +112,40 @@
       lb.addEventListener('close', function () {
         full.removeAttribute('src');
       });
+    })();
+
+    (function () {
+      var row = document.querySelector('.screens__row');
+      var arrows = document.querySelectorAll('.screens__arrow');
+      if (!row || !arrows.length) return;
+
+      var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function step() {
+        var tile = row.querySelector('.screen');
+        var gap = parseFloat(getComputedStyle(row).columnGap) || 0;
+        return tile ? tile.offsetWidth + gap : row.clientWidth;
+      }
+
+      function sync() {
+        var max = row.scrollWidth - row.clientWidth;
+        arrows[0].disabled = row.scrollLeft <= 1;
+        arrows[1].disabled = row.scrollLeft >= max - 1;
+      }
+
+      arrows.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          row.scrollBy({
+            left: Number(btn.dataset.dir) * step(),
+            behavior: smooth ? 'smooth' : 'auto'
+          });
+        });
+      });
+
+      row.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      window.addEventListener('load', sync);
+      sync();
     })();
   </script>
 </body>
