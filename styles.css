@@ -32,13 +32,13 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  min-height: 100%;
+  background: #102349 linear-gradient(to bottom, #6299a4, #102349) fixed;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(10deg, #102349, #6299a4) fixed;
-  background-size: cover;
   font-family: Helvetica, Arial, sans-serif;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
@@ -57,7 +57,11 @@ body {
 .page {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding:
+    calc(4rem + env(safe-area-inset-top))
+    calc(1.5rem + env(safe-area-inset-right))
+    calc(4rem + env(safe-area-inset-bottom))
+    calc(1.5rem + env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -436,15 +440,14 @@ hr.rule {
    -------------------------------------------------------------------------- */
 
 @media (max-width: 480px) {
-  :root {
-    --radius-card: 1.5rem;
-  }
-
   .page {
-    padding: 2.5rem 1rem;
+    padding:
+      calc(2.5rem + env(safe-area-inset-top))
+      calc(2rem + env(safe-area-inset-right))
+      calc(2.5rem + env(safe-area-inset-bottom))
+      calc(2rem + env(safe-area-inset-left));
     gap: 1.5rem;
   }
-
 
   .card {
     padding: 1.25rem;
