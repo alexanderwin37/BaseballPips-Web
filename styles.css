@@ -137,10 +137,17 @@ hr.rule {
 
 .hero__title {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero__tagline {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--muted);
 }
 
 /* --------------------------------------------------------------------------
@@ -317,15 +324,23 @@ hr.rule {
 /* line-height: 0 collapses the inline text box the anchor would otherwise
    generate around the image, which is what produced an I-beam cursor. */
 .appstore {
-  display: inline-block;
-  margin-top: 1.5rem;
+  display: block;
   line-height: 0;
   cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.appstore:hover,
+.appstore:focus-visible {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.40);
 }
 
 .appstore img {
   display: block;
-  height: 2.75rem;
+  height: 3rem;
   width: auto;
   -webkit-user-select: none;
   user-select: none;
@@ -454,7 +469,7 @@ hr.rule {
   }
 
   .hero__title {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   .card__heading {
@@ -483,6 +498,7 @@ hr.rule {
   .capsule,
   .backlink,
   .lightbox__close,
+  .appstore,
   .appstore img {
     transition: none;
   }
