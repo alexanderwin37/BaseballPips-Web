@@ -257,7 +257,7 @@ hr.rule {
   padding: var(--seg-pad);
   border: 1px solid var(--glass-border);
   border-radius: calc(var(--seg-h) / 2 + var(--seg-pad) + 1px);
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: transparent;
 }
 
 .screens__arrow {
